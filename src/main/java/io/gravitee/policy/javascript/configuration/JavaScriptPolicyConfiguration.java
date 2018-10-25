@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.groovy.configuration;
+package io.gravitee.policy.javascript.configuration;
 
 import io.gravitee.policy.api.PolicyConfiguration;
 
 /**
  * @author David BRASSELY (david.brassely at graviteesource.com)
  * @author GraviteeSource Team
+ * @author Alexandre Tolstenko (tolstenko at gr1d.io)
+ * @author gr1d.io team
  */
-public class GroovyPolicyConfiguration implements PolicyConfiguration {
+public class JavaScriptPolicyConfiguration implements PolicyConfiguration {
 
     private String onRequestScript;
 
