@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.groovy;
+package io.gravitee.policy.javascript;
 
 import groovy.lang.Binding;
 import groovy.lang.GroovyCodeSource;
@@ -32,10 +32,9 @@ import io.gravitee.policy.api.annotations.OnRequest;
 import io.gravitee.policy.api.annotations.OnRequestContent;
 import io.gravitee.policy.api.annotations.OnResponse;
 import io.gravitee.policy.api.annotations.OnResponseContent;
-import io.gravitee.policy.groovy.configuration.GroovyPolicyConfiguration;
-import io.gravitee.policy.groovy.model.ContentAwareRequest;
-import io.gravitee.policy.groovy.model.ContentAwareResponse;
-import io.gravitee.policy.groovy.utils.Sha1;
+import io.gravitee.policy.javascript.model.ContentAwareRequest;
+import io.gravitee.policy.javascript.model.ContentAwareResponse;
+import io.gravitee.policy.javascript.utils.Sha1;
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.codehaus.groovy.runtime.InvokerHelper;
 
@@ -45,10 +44,12 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author David BRASSELY (david.brassely at graviteesource.com)
  * @author GraviteeSource Team
+ * @author Alexandre Tolstenko (tolstenko at gr1d.io)
+ * @author gr1d.io team
  */
-public class GroovyPolicy {
+public class JavaScriptPolicy {
 
-    private final GroovyPolicyConfiguration groovyPolicyConfiguration;
+    private final io.gravitee.policy.javascript.configuration.JavaScriptPolicyConfiguration javaScriptPolicyConfiguration;
 
     private final static String REQUEST_VARIABLE_NAME = "request";
     private final static String RESPONSE_VARIABLE_NAME = "response";
@@ -59,24 +60,24 @@ public class GroovyPolicy {
 
     private static final ConcurrentMap<String, Class<?>> sources = new ConcurrentHashMap<>();
 
-    public GroovyPolicy(GroovyPolicyConfiguration groovyPolicyConfiguration) {
-        this.groovyPolicyConfiguration = groovyPolicyConfiguration;
+    public JavaScriptPolicy(io.gravitee.policy.javascript.configuration.JavaScriptPolicyConfiguration javaScriptPolicyConfiguration) {
+        this.javaScriptPolicyConfiguration = javaScriptPolicyConfiguration;
     }
 
     @OnRequest
     public void onRequest(Request request, Response response, ExecutionContext executionContext, PolicyChain policyChain) {
-        executeScript(request, response, executionContext, policyChain, groovyPolicyConfiguration.getOnRequestScript());
+        executeScript(request, response, executionContext, policyChain, javaScriptPolicyConfiguration.getOnRequestScript());
     }
 
     @OnResponse
     public void onResponse(Request request, Response response, ExecutionContext executionContext, PolicyChain policyChain) {
-        executeScript(request, response, executionContext, policyChain, groovyPolicyConfiguration.getOnResponseScript());
+        executeScript(request, response, executionContext, policyChain, javaScriptPolicyConfiguration.getOnResponseScript());
     }
 
     @OnResponseContent
     public ReadWriteStream onResponseContent(Request request, Response response, ExecutionContext executionContext,
                                              PolicyChain policyChain) {
-        String script = groovyPolicyConfiguration.getOnResponseContentScript();
+        String script = javaScriptPolicyConfiguration.getOnResponseContentScript();
 
         if (script != null && !script.trim().isEmpty()) {
             return TransformableResponseStreamBuilder
@@ -113,7 +114,7 @@ public class GroovyPolicy {
     @OnRequestContent
     public ReadWriteStream onRequestContent(Request request, Response response, ExecutionContext executionContext,
                                             PolicyChain policyChain) {
-        String script = groovyPolicyConfiguration.getOnRequestContentScript();
+        String script = javaScriptPolicyConfiguration.getOnRequestContentScript();
 
         if (script != null && !script.trim().isEmpty()) {
             return TransformableRequestStreamBuilder
