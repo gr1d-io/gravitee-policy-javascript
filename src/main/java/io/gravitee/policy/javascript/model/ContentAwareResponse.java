@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.groovy.model;
+package io.gravitee.policy.javascript.model;
 
 import io.gravitee.common.http.HttpHeaders;
 import io.gravitee.gateway.api.Response;
@@ -23,6 +23,8 @@ import io.gravitee.gateway.api.stream.WriteStream;
 /**
  * @author David BRASSELY (david.brassely at graviteesource.com)
  * @author GraviteeSource Team
+ * @author Alexandre Tolstenko (tolstenko at gr1d.io)
+ * @author gr1d.io team
  */
 public class ContentAwareResponse implements Response {
 

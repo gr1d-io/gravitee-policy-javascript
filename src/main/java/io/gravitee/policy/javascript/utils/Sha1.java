@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.groovy.utils;
+package io.gravitee.policy.javascript.utils;
 
 import java.security.MessageDigest;
 

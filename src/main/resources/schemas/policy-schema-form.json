@@ -1,68 +1,68 @@
 {
   "type" : "object",
-  "id" : "urn:jsonschema:io:gravitee:policy:groovy:configuration:GroovyPolicyConfiguration",
+  "id" : "urn:jsonschema:io:gravitee:policy:javascript:configuration:JavaScriptPolicyConfiguration",
   "properties" : {
     "onRequestScript" : {
       "title": "On-request script",
-      "description": "Groovy script to evaluate during the OnRequest phase.",
+      "description": "JavaScript script to evaluate during the OnRequest phase.",
       "type" : "string",
       "x-schema-form": {
         "type": "codemirror",
         "codemirrorOptions": {
-          "placeholder": "Put your groovy script here or drag'n'drop groovy script",
+          "placeholder": "Put your javascript here or drag'n'drop javascript",
           "lineWrapping": true,
           "lineNumbers": true,
           "allowDropFileTypes": true,
           "autoCloseTags": true,
-          "mode": "groovy"
+          "mode": "javascript"
         }
       }
     },
     "onResponseScript" : {
       "title": "On-response script",
-      "description": "Groovy script to evaluate during the OnResponse phase.",
+      "description": "JavaScript to evaluate during the OnResponse phase.",
       "type" : "string",
       "x-schema-form": {
         "type": "codemirror",
         "codemirrorOptions": {
-          "placeholder": "Put your groovy script here or drag'n'drop groovy script",
+          "placeholder": "Put your javascript here or drag'n'drop javascript script",
           "lineWrapping": true,
           "lineNumbers": true,
           "allowDropFileTypes": true,
           "autoCloseTags": true,
-          "mode": "groovy"
+          "mode": "javascript"
         }
       }
     },
     "onRequestContentScript" : {
       "title": "On-request content script",
-      "description": "Groovy script to evaluate during the 'request-content' phase. <br> Useful to transform request content",
+      "description": "JavaScript to evaluate during the 'request-content' phase. <br> Useful to transform request content",
       "type" : "string",
       "x-schema-form": {
         "type": "codemirror",
         "codemirrorOptions": {
-          "placeholder": "Put your groovy script here or drag'n'drop groovy script",
+          "placeholder": "Put your javascript here or drag'n'drop javascript script",
           "lineWrapping": true,
           "lineNumbers": true,
           "allowDropFileTypes": true,
           "autoCloseTags": true,
-          "mode": "groovy"
+          "mode": "javascript"
         }
       }
     },
     "onResponseContentScript" : {
       "title": "On-response content script",
-      "description": "Groovy script to evaluate during the 'response-content' phase. <br> Useful to transform response content",
+      "description": "JavaScript to evaluate during the 'response-content' phase. <br> Useful to transform response content",
       "type" : "string",
       "x-schema-form": {
         "type": "codemirror",
         "codemirrorOptions": {
-          "placeholder": "Put your groovy script here or drag'n'drop groovy script",
+          "placeholder": "Put your javascript here or drag'n'drop javascript script",
           "lineWrapping": true,
           "lineNumbers": true,
           "allowDropFileTypes": true,
           "autoCloseTags": true,
-          "mode": "groovy"
+          "mode": "javascript"
         }
       }
     }

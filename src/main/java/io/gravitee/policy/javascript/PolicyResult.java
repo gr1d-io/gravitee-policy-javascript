@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.groovy;
+package io.gravitee.policy.javascript;
 
 import io.gravitee.common.http.HttpStatusCode;
 
 /**
  * @author David BRASSELY (david.brassely at graviteesource.com)
  * @author GraviteeSource Team
+ * @author Alexandre Tolstenko (tolstenko at gr1d.io)
+ * @author gr1d.io team
  */
 public class PolicyResult {
 
