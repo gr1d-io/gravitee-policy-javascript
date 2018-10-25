@@ -13,7 +13,7 @@
 |===
 
 == Description
-The https://en.wikipedia.org/wiki/JavaScript[JavaScript] policy lets the user (ie. API publisher) to run groovy scripts during all the
+The https://en.wikipedia.org/wiki/JavaScript[JavaScript] policy lets the user (ie. API publisher) to run javascript scripts during all the
 stages of the request processing through the gateway.
 
 The following javascript is an example executed during the _OnResponse_ phase to change HTTP headers:
