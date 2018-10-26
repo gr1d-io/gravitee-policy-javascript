@@ -56,7 +56,7 @@ public class JavaScriptPolicy {
     private final static String RESULT_VARIABLE_NAME = "result";
 
     private static final ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
-    private static final ScriptEngine NASHORN = scriptEngineManager.getEngineByName("NASHORN");
+    private static final ScriptEngine NASHORN = scriptEngineManager.getEngineByName("nashorn");
 
     private static final ConcurrentMap<String, Class<?>> sources = new ConcurrentHashMap<>();
 
