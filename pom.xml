@@ -22,7 +22,7 @@
 
     <groupId>io.gravitee.policy</groupId>
     <artifactId>gravitee-policy-javascript</artifactId>
-    <version>1.8.0-SNAPSHOT</version>
+    <version>1.8.0</version>
 
     <name>Gravitee.io APIM - Policy - JavaScript</name>
     <description>Description of the JavaScript Gravitee Policy</description>
