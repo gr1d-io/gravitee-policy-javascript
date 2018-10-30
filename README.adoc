@@ -23,6 +23,15 @@ The following javascript is an example executed during the _OnResponse_ phase to
 request.headers.add('X-Powered-By','gr1d');
 ----
 
+If you want to access the context data, you can get it just like this:
+[source, javascript]
+----
+var contextType = Java.type("io.gravitee.gateway.api.ExecutionContext");
+print(context.getAttribute(contextType.ATTR_API));
+print(context.getAttribute(contextType.ATTR_USER_ID));
+print(context.getAttribute(contextType.ATTR_PLAN));
+print(context.getAttribute(contextType.ATTR_APPLICATION));
+----
 == Usage
 
 You can attach a javascript to all phases of the request processing.
