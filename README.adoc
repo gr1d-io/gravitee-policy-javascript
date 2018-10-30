@@ -20,13 +20,14 @@ The following javascript is an example executed during the _OnResponse_ phase to
 
 [source, javascript]
 ----
-response.headers.remove 'X-Powered-By'
-response.headers.'X-Gravitee-Gateway-Version' = '0.14.0'
+request.headers.add('X-Powered-By','gr1d');
 ----
 
 == Usage
 
 You can attach a javascript to all phases of the request processing.
+
+Keep in mind that you must read the gravitee classes in order to understand how to transform your data. `Request.java`, `Response.java` and `HttpHeaders.java`
 
 === OnRequest / OnResponse
 
@@ -49,14 +50,14 @@ status code and a message (not mandatory, status is equals to 500 (internal serv
 
 [source, javascript]
 ----
-import io.gravitee.policy.javascript.PolicyResult.State
+var State = Java.type("io.gravitee.policy.javascript.PolicyResult.State");
 
 if (request.headers.containsKey('X-Gravitee-Break')) {
     result.state = State.FAILURE;
-    result.code = 500
-    result.error = 'Stop request processing due to X-Gravitee-Break header'
+    result.code = 400;
+    result.error = 'Stop request processing due to X-Gravitee-Break header';
 } else {
-    request.headers.'X-JavaScript-Policy' = 'ok'
+    request.headers.'X-JavaScript-Policy' = 'ok';
 }
 ----
 
@@ -64,11 +65,11 @@ If you want to customize the error send by the policy:
 
 [source, javascript]
 ----
-import io.gravitee.policy.javascript.PolicyResult.State
+var State = Java.type("io.gravitee.policy.javascript.PolicyResult.State");
 result.state = State.FAILURE;
-result.code = 400
-result.error = '{"error":"My specific error message","code":"MY_ERROR_CODE"}'
-result.contentType = 'application/json'
+result.code = 400;
+result.error = '{"error":"My specific error message","code":"MY_ERROR_CODE"}';
+result.contentType = 'application/json';
 ----
 
 === OnRequestContent / OnResponseContent
@@ -93,14 +94,11 @@ Following is an example to show you how to use _JavaScript policy_ to transform 
 ==== JavaScript script
 [source, javascript]
 ----
-import javascript.json.JsonSlurper
-import javascript.json.JsonOutput
-
-def jsonSlurper = new JsonSlurper()
-def content = jsonSlurper.parseText(response.content)
-content[0].firstname = 'Hacked ' + content[0].firstname
-content[0].country = 'US'
-return JsonOutput.toJson(content)
+var content = JSON.parse(request.getContent());
+print(request.getContent());
+content[0].firstname = 'Hacked ' + content[0].firstname;
+content[0].country = 'US';
+JSON.stringfy(content);
 ----
 
 ==== Output body content
@@ -115,13 +113,13 @@ return JsonOutput.toJson(content)
     }
 ]
 ----
-
+request.headers.add('X-Powered-By','gr1d');
 == Configuration
 [source, json]
 .Configuration example
 "javascript": {
-    "onRequestScript": "request.headers.'X-Gravitee-Gateway' = '0.14.0'",
-    "onResponseScript": "response.headers.remove 'X-Powered-By'",
+    "onRequestScript": "request.headers.add('X-Gravitee-Gateway','0.14.0');",
+    "onResponseScript": "request.headers.remove('X-Powered-By');",
     "onRequestContentScript": "" // Not executed if empty
     "onResponseContentScript": "" // Not executed if empty
 }
