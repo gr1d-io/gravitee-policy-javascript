@@ -28,10 +28,12 @@ import io.gravitee.gateway.api.http.stream.TransformableResponseStreamBuilder;
 import io.gravitee.gateway.api.stream.ReadWriteStream;
 import io.gravitee.gateway.api.stream.exception.TransformationException;
 import io.gravitee.policy.api.PolicyChain;
+import io.gravitee.policy.api.PolicyConfiguration;
 import io.gravitee.policy.api.annotations.OnRequest;
 import io.gravitee.policy.api.annotations.OnRequestContent;
 import io.gravitee.policy.api.annotations.OnResponse;
 import io.gravitee.policy.api.annotations.OnResponseContent;
+import io.gravitee.policy.javascript.configuration.JavaScriptPolicyConfiguration;
 import io.gravitee.policy.javascript.model.ContentAwareRequest;
 import io.gravitee.policy.javascript.model.ContentAwareResponse;
 
@@ -51,7 +53,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class JavaScriptPolicy {
 
-    private final io.gravitee.policy.javascript.configuration.JavaScriptPolicyConfiguration javaScriptPolicyConfiguration;
+    private final JavaScriptPolicyConfiguration javaScriptPolicyConfiguration;
 
     private final static String REQUEST_VARIABLE_NAME = "request";
     private final static String RESPONSE_VARIABLE_NAME = "response";
@@ -63,9 +65,9 @@ public class JavaScriptPolicy {
     private static final ScriptEngine SCRIPT_ENGINE = SCRIPT_ENGINE_MANAGER.getEngineByName(SCRIPT_ENGINE_NAME);
 
     private static final ConcurrentMap<String, Class<?>> sources = new ConcurrentHashMap<>();
-
-    public JavaScriptPolicy(io.gravitee.policy.javascript.configuration.JavaScriptPolicyConfiguration javaScriptPolicyConfiguration) {
-        this.javaScriptPolicyConfiguration = javaScriptPolicyConfiguration;
+    
+    public JavaScriptPolicy(PolicyConfiguration javaScriptPolicyConfiguration) {
+        this.javaScriptPolicyConfiguration = (JavaScriptPolicyConfiguration)javaScriptPolicyConfiguration;
     }
 
     @OnRequest
